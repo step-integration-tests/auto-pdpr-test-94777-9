@@ -5,6 +5,13 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/custom-agent@v2
+        with:
+          egress-policy: audit
+          allowed-endpoints: >
+            github.com:443
+
       - uses: actions/checkout@v3
 
       - uses: amannn/action-semantic-pull-request@v5
@@ -29,11 +36,25 @@ jobs:
   lint3:
     runs-on: ubuntu-latest-code
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/custom-agent@v2
+        with:
+          egress-policy: audit
+          allowed-endpoints: >
+            github.com:443
+
       - uses: actions/checkout@v1
 
   lint:
     runs-on: ubuntu-latest
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/custom-agent@v2
+        with:
+          egress-policy: audit
+          allowed-endpoints: >
+            github.com:443
+
       - uses: actions/checkout@v1
 
       - uses: github/super-linter@v3
@@ -68,22 +89,50 @@ jobs:
   lint2:
     runs-on: ubuntu-latest-code
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/custom-agent@v2
+        with:
+          egress-policy: audit
+          allowed-endpoints: >
+            github.com:443
+
       - uses: actions/checkout@v1
       - uses: actions/checkout-test@v1
 
   lint5:
     runs-on: self-hosted
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/custom-agent@v2
+        with:
+          egress-policy: audit
+          allowed-endpoints: >
+            github.com:443
+
       - uses: actions/checkout@v1
 
   lint6:
     runs-on: gpu-rtx-5050
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/custom-agent@v2
+        with:
+          egress-policy: audit
+          allowed-endpoints: >
+            github.com:443
+
       - uses: actions/checkout@v1
       
   build2:
     runs-on: [self-hosted, linux, arm64]
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/custom-agent@v2
+        with:
+          egress-policy: audit
+          allowed-endpoints: >
+            github.com:443
+
       - uses: actions/checkout@v3
       - run: echo "build"
       
