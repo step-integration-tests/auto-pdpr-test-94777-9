@@ -6,10 +6,24 @@ jobs:
   build:
     runs-on: my-custom-runner          # ← NOT in runnerLabels
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/custom-agent@v2
+        with:
+          egress-policy: audit
+          allowed-endpoints: >
+            github.com:443
+
       - uses: actions/checkout@v4
       - run: echo "build"
   publish:
     runs-on: [self-hosted, linux, x64] # ← also not in runnerLabels
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/custom-agent@v2
+        with:
+          egress-policy: audit
+          allowed-endpoints: >
+            github.com:443
+
       - uses: actions/checkout@v4
       - run: echo "publish"
